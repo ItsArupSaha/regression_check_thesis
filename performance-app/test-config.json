@@ -1,0 +1,33 @@
+{
+    "global_triggers": [
+        "package.json",
+        "next.config.mjs",
+        "components/"
+    ],
+    "routes": [
+        {
+            "name": "Homepage",
+            "url": "/",
+            "trigger_files": [
+                "app/page.tsx"
+            ],
+            "max_latency_ms": 200
+        },
+        {
+            "name": "Products",
+            "url": "/products",
+            "trigger_files": [
+                "app/products/page.tsx"
+            ],
+            "max_latency_ms": 500
+        },
+        {
+            "name": "About",
+            "url": "/about",
+            "trigger_files": [
+                "app/about/page.tsx"
+            ],
+            "max_latency_ms": 300
+        }
+    ]
+}
