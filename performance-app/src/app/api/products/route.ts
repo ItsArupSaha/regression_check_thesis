@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     // Simulate complex database query (REGRESSION)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const products = Array.from({ length: 20 }).map((_, i) => ({
         id: i + 1,
