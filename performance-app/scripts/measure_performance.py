@@ -168,4 +168,4 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    asyncio.run(measure_performance(args.url, args.headed, args.commit))
+    asyncio.run(measure_performance(args.url, args.headed, args.commit)) 
