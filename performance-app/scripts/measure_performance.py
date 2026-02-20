@@ -1,5 +1,4 @@
 import asyncio
-import csv
 import os
 import sys
 import argparse
@@ -14,7 +13,6 @@ MAX_API_LATENCY_MS = 200
 # Script is in /scripts, we want the file in the parent directory (root of performance-app)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(SCRIPT_DIR)
-OUTPUT_FILE = os.path.join(PARENT_DIR, "performance_log.csv")
 
 async def measure_performance(url, show_ui=False, commit_id="manual"):
     # Lock File Mechanism
@@ -120,7 +118,6 @@ async def measure_performance(url, show_ui=False, commit_id="manual"):
                 }
 
                 print(f"Captured results: {results}")
-                save_csv(results)
                 
                 # --- Quality Gate Check ---
                 if results["API_Latency_ms"] > MAX_API_LATENCY_MS:
@@ -143,22 +140,6 @@ async def measure_performance(url, show_ui=False, commit_id="manual"):
                 os.remove(LOCK_FILE)
             except Exception as e:
                 print(f"Warning: Could not remove lock file: {e}")
-
-def save_csv(data):
-    try:
-        file_exists = os.path.isfile(OUTPUT_FILE)
-        
-        with open(OUTPUT_FILE, 'a', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=data.keys())
-            
-            if not file_exists:
-                writer.writeheader()
-            
-            writer.writerow(data)
-            
-        print(f"Data successfully saved to {OUTPUT_FILE}")
-    except Exception as e:
-        print(f"Error saving to CSV: {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Measure web app performance")
